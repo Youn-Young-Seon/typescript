@@ -1,8 +1,47 @@
 {
   type CoffeeCup = {
     shots: number;
-    hasMilk: boolean;
+    hasMilk?: boolean;
+    hasSugar?: boolean;
   };
+
+  interface MilkFrother {
+    makeMilk(cup: CoffeeCup): CoffeeCup;
+  }
+
+  interface SugarSource {
+    addSugar(cup: CoffeeCup): CoffeeCup;
+  }
+
+  class CheapMilkSteamer implements MilkFrother {
+    makeMilk(cup: CoffeeCup): CoffeeCup {
+      console.log(`Steaming some milk🥛...`);
+      return {
+        ...cup,
+        hasMilk: true,
+      };
+    }
+  }
+
+  class FancyMilkSteamer implements MilkFrother {
+    makeMilk(cup: CoffeeCup): CoffeeCup {
+      console.log(`Fancy!!!! Steaming some milk🥛...`);
+      return {
+        ...cup,
+        hasMilk: true,
+      };
+    }
+  }
+
+  class AutomaticSugarMixer implements SugarSource {
+    addSugar(cuppa: CoffeeCup): CoffeeCup {
+      console.log(`Adding sugar...`);
+      return {
+        ...cuppa,
+        hasSugar: true,
+      };
+    }
+  }
 
   interface CoffeeMaker {
     makeCoffee(shots: number): CoffeeCup;
@@ -75,9 +114,34 @@
     }
   }
 
-  const machine = new CoffeeMachine(23);
-  const latteMachine = new CaffeLatteMachine(23, 'SSSS');
-  const coffee = latteMachine.makeCoffee(1);
-  console.log(coffee);
-  console.log(latteMachine.serialNumber);
+  class SweetCoffeeMaker extends CoffeeMachine {
+    makeCoffee(shots: number): CoffeeCup {
+      const coffee = super.makeCoffee(shots);
+      return {
+        ...coffee,
+        hasSugar: true,
+      };
+    }
+  }
+
+  class SweetCaffeLatteMachine extends CoffeeMachine {
+    constructor(
+      beans: number,
+      private sugar: SugarSource,
+      private milk: MilkFrother,
+    ) {
+      super(beans);
+    }
+    makeCoffee(shots: number): CoffeeCup {
+      const coffee = super.makeCoffee(shots);
+      const milkCoffee = this.milk.makeMilk(coffee);
+      return this.sugar.addSugar(milkCoffee);
+    }
+  }
+  const machine = new SweetCaffeLatteMachine(
+    32,
+    new AutomaticSugarMixer(),
+    new FancyMilkSteamer()
+  );
+  machine.makeCoffee(2);
 }

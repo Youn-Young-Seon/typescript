@@ -1,23 +1,20 @@
 {
   type CoffeeCup = {
     shots: number;
-    hasMilk: boolean;
+    hasMilk?: boolean;
+    hasSugar?: boolean;
   };
 
   interface CoffeeMaker {
     makeCoffee(shots: number): CoffeeCup;
   }
 
-  class CoffeeMachine implements CoffeeMaker {
+  abstract class CoffeeMachine implements CoffeeMaker {
     private static BEANS_GRAMM_PER_SHOT: number = 7; // class level
     private coffeeBeans: number = 0; // instance (object) level
 
     constructor(coffeeBeans: number) {
       this.coffeeBeans = coffeeBeans;
-    }
-
-    static makeMachine(coffeeBeans: number): CoffeeMachine {
-      return new CoffeeMachine(coffeeBeans);
     }
 
     fillCoffeeBeans(beans: number) {
@@ -43,13 +40,7 @@
       console.log('heating up... 🔥');
     }
 
-    private extract(shots: number): CoffeeCup {
-      console.log(`Pulling ${shots} shots... ☕️`);
-      return {
-        shots,
-        hasMilk: false,
-      };
-    }
+    protected abstract extract(shots: number): CoffeeCup;
 
     makeCoffee(shots: number): CoffeeCup {
       this.grindBeans(shots);
@@ -65,19 +56,33 @@
     private steamMilk(): void {
       console.log('Steaming some milk... 🥛');
     }
-    makeCoffee(shots: number): CoffeeCup {
-      const coffee = super.makeCoffee(shots);
+
+    protected extract(shots: number): CoffeeCup {
       this.steamMilk();
       return {
-        ...coffee,
+        shots,
         hasMilk: true,
       };
     }
   }
 
-  const machine = new CoffeeMachine(23);
-  const latteMachine = new CaffeLatteMachine(23, 'SSSS');
-  const coffee = latteMachine.makeCoffee(1);
-  console.log(coffee);
-  console.log(latteMachine.serialNumber);
+  class SweetCoffeeMaker extends CoffeeMachine {
+    protected extract(shots: number): CoffeeCup {
+      return {
+        shots,
+        hasSugar: true,
+      };
+    }
+  }
+
+  const machines: CoffeeMaker[] = [
+    new CaffeLatteMachine(16, '1'),
+    new SweetCoffeeMaker(16),
+    new CaffeLatteMachine(16, '1'),
+    new SweetCoffeeMaker(16),
+  ];
+  machines.forEach(machine => {
+    console.log('-------------------------');
+    machine.makeCoffee(1);
+  });
 }
