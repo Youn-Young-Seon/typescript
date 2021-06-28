@@ -1,0 +1,91 @@
+:root{
+    --bg-main-color: #00000080;
+    --bg-accent-color: #2d2d2d;
+    --accent-color: #f64435;
+    --text-accent-color: #ffe498;  
+    --text-edit-bg-color: #575757;
+    --border-color: #3f3f3f;
+    --shadow-color: #202020;
+    --document-bg-color: #68686850;
+    --component-bg-gradient: radial-gradient(circle, #646464e6 0%, #363636e6 100%);
+    --smokywhite: #dddbd8;
+    --black: #000000;
+    --translucent-black: #00000099;    
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+  padding: 0;
+  width: 100vw;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  padding-left: 0;
+}
+
+li {
+  list-style: none;
+}
+
+button {
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+header{
+    width: 100vw;
+    height: 150px;
+    background-color: black;
+    top: 0;
+    left: 0;
+    position: sticky;
+}
+
+.header__container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--accent-color);
+}
+
+.header__container li{
+  display: inline-block;
+  margin: 2px;
+}
+
+.header__container button{
+    width: 120px;
+    height: 30px;
+    border-radius: 2px;
+    background-color: var(--accent-color);
+    color: var(--smokywhite);
+}
+
+#main{
+    background: url('imgs/background-210125-235634.png') center/cover no-repeat;
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+}
+
+footer{
+    width: 100vw;
+    height: 100px;
+    background-color: black;
+    color: var(--smokywhite);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
