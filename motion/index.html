@@ -1,78 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/cab6ef4528.js" crossorigin="anonymous"></script>
-    <script src="./build/script.js" defer></script>
-</head>
-<body>
-    <header>
-        <div class="header__container">
-            <h1>MOTION</h1>
-            <ul class="header__list">
-                <li><button id="image">IMAGE</button></li>
-                <li><button id="video">VIDEO</button></li>
-                <li><button id="note">NOTE</button></li>
-                <li><button id="task">TASK</button></li>
-            </ul>
-        </div>
-    </header>
-    <div id="main">
-        <div class="main__container">
-            <section class="main__section active">
-                <div class="main__contents active">
-                    <img src="imgs/background-210125-235634.png" alt="">
-                </div>
-                <div class="main__title active">
-                    dfsfafs
-                </div>
-                <div class="main__close">
-                    <i class="fas fa-times"></i>
-                </div>
-            </section>
-            <section class="main__section passive">
-                <div class="main__title passive">
-                    dfsfafsdfsfafs
-                </div>
-                <div class="main__contents passive">
-                    dfsfafsdfsfafsdfsfafs
-                </div>
-                <div class="main__close">
-                    <i class="fas fa-times"></i>
-                </div>
-            </section>
-            <section class="main__section passive">
-                <div class="main__title passive">
-                    dfsfafsdfsfafs
-                </div>
-                <div class="main__contents passive checkBox">
-                    <input type="checkbox">sdfdsfsf
-                </div>
-                <div class="main__close">
-                    <i class="fas fa-times"></i>
-                </div>
-            </section>            
-        </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Motion</title>
+    <link rel="stylesheet" href="./style/style.css" />
+    <script type="module" src="./dist/app.js" defer></script>
+  </head>
+  <body>
+    <div class="app">
+      <header class="banner">
+        <h1 class="banner__title">Motion</h1>
+        <ul class="control-panel">
+          <li><button id="new-image" class="create-button">Image</button></li>
+          <li><button id="new-video" class="create-button">Video</button></li>
+          <li><button id="new-note" class="create-button">Note</button></li>
+          <li><button id="new-todo" class="create-button">Todo</button></li>
+        </ul>
+      </header>
+      <main class="document"></main>
+      <footer class="footer">
+        <p>© Copyright by Dream Coding Academy. All rights reserved.</p>
+      </footer>
     </div>
-    <footer>
-        <span>© Copyright by D.C Academy All rights reversed</span>
-    </footer>
-    
-    <div id="modal">
-        <div class="modal__container">
-            <div class="modal__close">
-                <i class="fas fa-times"></i>
-            </div>
-            <label for="title" class="modal__label">Title</label>
-            <input type="text" class="modal__input">
-            <label for="main" class="modal__label">URL</label>
-            <input type="text" class="modal__input">
-            <button>ADD</button>
-        </div>
-    </div>
-</body>
+  </body>
 </html>

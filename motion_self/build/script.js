@@ -2,18 +2,28 @@
 var headerList = document.querySelector('.header__list');
 var modal = document.querySelector('#modal');
 var modalClose = document.querySelector('.modal__close');
-var modalInfoImpl = /** @class */ (function () {
-    function modalInfoImpl(name) {
-        this.name = name;
+var modalAdd = document.querySelector('.modal__add');
+var ModalInfo = /** @class */ (function () {
+    function ModalInfo(_name) {
+        this._name = _name;
     }
-    modalInfoImpl.prototype.build = function () {
+    Object.defineProperty(ModalInfo.prototype, "name", {
+        get: function () {
+            return this._name;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    ModalInfo.newIns = function (name) {
+        return new ModalInfo(name);
+    };
+    ModalInfo.prototype.build = function () {
         var modalLabel = document.querySelector('label[for="main"]');
         var modalInputs = document.querySelectorAll('#modal input');
-        console.log(modalInputs);
         modalInputs.forEach(function (modalInput) {
             modalInput.value = '';
         });
-        if (this.name === 'IMAGE' || this.name === 'VIDEO') {
+        if (this._name === 'IMAGE' || this._name === 'VIDEO') {
             modalLabel && (modalLabel.textContent = 'URL');
         }
         else {
@@ -21,18 +31,18 @@ var modalInfoImpl = /** @class */ (function () {
         }
         modal.style.visibility = 'visible';
     };
-    modalInfoImpl.prototype.create = function (name) {
-    };
-    return modalInfoImpl;
+    return ModalInfo;
 }());
 headerList.addEventListener('click', function (e) {
     var target = e.target;
     var motionSelect = target.id.toUpperCase();
     if (motionSelect !== "") {
-        return new modalInfoImpl(motionSelect).build();
+        return ModalInfo.newIns(motionSelect).build();
     }
 });
 modalClose.addEventListener('click', function () {
     modal.style.visibility = 'hidden';
+});
+modalAdd.addEventListener('click', function (e) {
 });
 //# sourceMappingURL=script.js.map
